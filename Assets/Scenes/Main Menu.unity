@@ -323,7 +323,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 22879925}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699936311}
+        m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
+        m_MethodName: OnClickCreateRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &22879925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2721,7 +2733,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688894213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699936311}
+        m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
+        m_MethodName: OnClickJoinRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &688894213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4710,7 +4734,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1089994434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699936311}
+        m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
+        m_MethodName: OnClickQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1089994434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6022,7 +6058,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1248444492}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699936310}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1248444492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7105,7 +7153,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513682513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba5764f4714bd64ab9efab127938e77, type: 3}
   m_Name: 
@@ -7119,7 +7167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513682513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88230848386761045af440d808ee3efa, type: 3}
   m_Name: 
@@ -7973,8 +8021,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runnerPrefab: {fileID: 1230292264}
   gameScene:
-    RawValue: 0
-  roomNameInput: {fileID: 0}
+    RawValue: 2
+  roomNameInput: {fileID: 1454051829}
 --- !u!4 &1699936312
 Transform:
   m_ObjectHideFlags: 0
@@ -8468,7 +8516,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1720965254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699936311}
+        m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
+        m_MethodName: OnClickSingle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1720965254
 MonoBehaviour:
   m_ObjectHideFlags: 0
