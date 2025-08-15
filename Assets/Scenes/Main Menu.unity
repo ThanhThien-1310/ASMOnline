@@ -326,7 +326,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699936311}
         m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
-        m_MethodName: ShowCreateRoom
+        m_MethodName: ShowCreate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2125,7 +2125,7 @@ GameObject:
   - component: {fileID: 391562287}
   - component: {fileID: 391562286}
   m_Layer: 5
-  m_Name: CreateRoombtn
+  m_Name: JoinRoombtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2197,7 +2197,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699936311}
         m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
-        m_MethodName: OnClickCreateRoom
+        m_MethodName: OnClickJoinOrCreate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3781,7 +3781,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699936311}
         m_TargetAssemblyTypeName: MenuNetworkStarter, Assembly-CSharp
-        m_MethodName: OnClickJoinRoom
+        m_MethodName: ShowJoin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9508,11 +9508,13 @@ MonoBehaviour:
   gameScene:
     RawValue: 2
   menuRoot: {fileID: 1095880739}
-  createRoomRoot: {fileID: 111976105}
-  roomNameInput: {fileID: 1454051829}
-  createButton: {fileID: 1970106145}
-  joinButton: {fileID: 688894212}
-  errorLabel: {fileID: 0}
+  createRoot: {fileID: 111976105}
+  joinRoot: {fileID: 534821450}
+  createRoomInput: {fileID: 1454051829}
+  createActionButton: {fileID: 1970106145}
+  joinRoomInput: {fileID: 270603098}
+  joinActionButton: {fileID: 391562286}
+  statusLabel: {fileID: 0}
 --- !u!4 &1699936312
 Transform:
   m_ObjectHideFlags: 0
