@@ -1,58 +1,112 @@
 ﻿using System.Threading.Tasks;
 using Fusion;
-using TMPro;                // nếu bạn dùng TMP InputField
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MenuNetworkStarter : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Fusion")]
     [Tooltip("Kéo prefab Runner (vd: Prototype Runner) vào đây")]
     public NetworkRunner runnerPrefab;
 
     [Tooltip("Chọn scene chơi (SceneRef của Fusion)")]
     public SceneRef gameScene;
 
-    [Tooltip("Ô nhập tên phòng, có thể để trống")]
+    private static NetworkRunner _runner; // giữ runner qua scene
+
+    [Header("UI: Panels/Canvas")]
+    public GameObject menuRoot;        // Panel/Canvas Menu chính
+    public GameObject createRoomRoot;  // Panel/Canvas Create Room
+
+    [Header("UI: Room")]
     public TMP_InputField roomNameInput;
+    public Button createButton;
+    public Button joinButton;
+    public TextMeshProUGUI errorLabel; // optional
 
-    private static NetworkRunner _runner; // giữ singleton qua scene
+    void Awake()
+    {
+        // Khởi trạng thái
+        if (menuRoot) menuRoot.SetActive(true);
+        if (createRoomRoot) createRoomRoot.SetActive(false);
 
+        if (roomNameInput) roomNameInput.onValueChanged.AddListener(_ => ValidateRoomName());
+        ValidateRoomName();
+    }
+
+    // ========= Toggle UI =========
+    public void ShowCreateRoom()
+    {
+        if (menuRoot) menuRoot.SetActive(false);
+        if (createRoomRoot) createRoomRoot.SetActive(true);
+
+        if (roomNameInput)
+        {
+            EventSystem.current?.SetSelectedGameObject(roomNameInput.gameObject);
+            roomNameInput.text = roomNameInput.text.Trim();
+            roomNameInput.ActivateInputField();
+        }
+        ValidateRoomName();
+    }
+
+    public void BackToMenu()
+    {
+        if (createRoomRoot) createRoomRoot.SetActive(false);
+        if (menuRoot) menuRoot.SetActive(true);
+        EventSystem.current?.SetSelectedGameObject(null);
+    }
+
+    // ========= Validate tên phòng =========
+    void ValidateRoomName()
+    {
+        string s = roomNameInput ? roomNameInput.text : "";
+        bool valid = IsValidRoomName(s);
+
+        if (createButton) createButton.interactable = valid;
+        if (joinButton) joinButton.interactable = valid;
+        if (errorLabel) errorLabel.text = valid ? "" : "Tên phòng 3–32 ký tự, không để trống.";
+    }
+
+    bool IsValidRoomName(string s)
+    {
+        if (string.IsNullOrWhiteSpace(s)) return false;
+        s = s.Trim();
+        return s.Length >= 3 && s.Length <= 32;
+        // Nếu muốn giới hạn ký tự: dùng Regex: ^[\\w\\- ]{3,32}$
+    }
+
+    // ========= Start Fusion =========
     async Task StartGame(GameMode mode, string session)
     {
-        // Nếu đã có runner (do Join/Create trước đó) thì dùng lại
         if (_runner == null)
         {
             _runner = Instantiate(runnerPrefab);
             _runner.name = "NetworkRunner";
             DontDestroyOnLoad(_runner);
 
-            // Đảm bảo có SceneManager
             var sm = _runner.GetComponent<NetworkSceneManagerDefault>();
             if (sm == null) sm = _runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
         }
 
-        // Tránh lỗi "NetworkRunner should not be reused" khi runner đang chạy
         if (_runner.IsRunning)
-        {
             await _runner.Shutdown();
-        }
 
-        var startArgs = new StartGameArgs
+        var args = new StartGameArgs
         {
-            GameMode = mode,                                   // Single / Host / Client
-            SessionName = string.IsNullOrWhiteSpace(session) ? "MainRoom" : session,
-            Scene = gameScene,                              // Fusion sẽ load sang scene chơi
+            GameMode = mode,                       // Single / Host / Client
+            SessionName = session.Trim(),             // dùng đúng tên người chơi nhập
+            Scene = gameScene,                  // scene gameplay
             SceneManager = _runner.GetComponent<INetworkSceneManager>()
         };
 
-        var result = await _runner.StartGame(startArgs);
+        var result = await _runner.StartGame(args);
         if (!result.Ok)
-        {
             Debug.LogError($"StartGame failed: {result.ShutdownReason}");
-        }
     }
 
-    // ====== Các hàm gắn cho Button OnClick ======
+    // ========= Button handlers =========
     public void OnClickSingle()
     {
         _ = StartGame(GameMode.Single, "Single");
@@ -60,14 +114,14 @@ public class MenuNetworkStarter : MonoBehaviour
 
     public void OnClickCreateRoom()
     {
-        var room = roomNameInput ? roomNameInput.text : "Room1";
-        _ = StartGame(GameMode.Host, room);
+        if (!IsValidRoomName(roomNameInput.text)) return;
+        _ = StartGame(GameMode.Host, roomNameInput.text);
     }
 
     public void OnClickJoinRoom()
     {
-        var room = roomNameInput ? roomNameInput.text : "Room1";
-        _ = StartGame(GameMode.Client, room);
+        if (!IsValidRoomName(roomNameInput.text)) return;
+        _ = StartGame(GameMode.Client, roomNameInput.text);
     }
 
     public void OnClickQuit()
