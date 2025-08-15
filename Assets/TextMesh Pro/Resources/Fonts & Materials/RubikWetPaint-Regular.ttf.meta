@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2d26eda9cf4544048a35c1a6e369c9fa
+guid: 3ee303a810d49eb479281f479a9d18ef
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Delius
+  - Rubik Wet Paint
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
