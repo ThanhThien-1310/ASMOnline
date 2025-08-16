@@ -15,9 +15,10 @@ public class MenuNetworkStarter : MonoBehaviour
     private bool _isStarting; // chặn double-click
 
     [Header("UI Roots")]
-    public GameObject menuRoot;
-    public GameObject createRoot;
-    public GameObject joinRoot;
+    public GameObject menuRoot;     // Menu chính
+    public GameObject createRoot;   // Canvas/Panel Create Room
+    public GameObject joinRoot;     // Canvas/Panel Join Game
+    public GameObject settingsRoot; // Canvas/Panel Settings
 
     [Header("Create UI")]
     public TMP_InputField createRoomInput;
@@ -42,6 +43,7 @@ public class MenuNetworkStarter : MonoBehaviour
     // ======= NAV =======
     public void ShowCreate() { ShowOnly(createRoot); Focus(createRoomInput); }
     public void ShowJoin() { ShowOnly(joinRoot); Focus(joinRoomInput); }
+    public void ShowSettings() { ShowOnly(settingsRoot); }
     public void BackToMenu() { ShowOnly(menuRoot); EventSystem.current?.SetSelectedGameObject(null); }
 
     void ShowOnly(GameObject target)
@@ -49,6 +51,7 @@ public class MenuNetworkStarter : MonoBehaviour
         if (menuRoot) menuRoot.SetActive(menuRoot == target);
         if (createRoot) createRoot.SetActive(createRoot == target);
         if (joinRoot) joinRoot.SetActive(joinRoot == target);
+        if (settingsRoot) settingsRoot.SetActive(settingsRoot == target);
         Validate();
     }
 
@@ -81,7 +84,7 @@ public class MenuNetworkStarter : MonoBehaviour
     // ======= Start Fusion (luôn tạo Runner mới) =======
     async Task<StartGameResult> StartWithNewRunner(GameMode mode, string session)
     {
-        // Xoá runner cũ, KHÔNG tái sử dụng
+        // KHÔNG tái sử dụng runner cũ
         if (_runner != null)
         {
             try { if (_runner.IsRunning) await _runner.Shutdown(); }
@@ -123,7 +126,7 @@ public class MenuNetworkStarter : MonoBehaviour
         _isStarting = false; Validate();
     }
 
-    // Join-or-Create bằng AutoHostOrClient (1 call duy nhất)
+    // Join-or-Create bằng 1 call
     public async void OnClickJoinOrCreate()
     {
         if (_isStarting) return;
